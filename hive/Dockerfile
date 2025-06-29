@@ -39,6 +39,11 @@ COPY hive-site.xml $HIVE_HOME/conf/hive-site.xml
 EXPOSE 9083
 
 # Entry point: Initialize schema if needed, then start metastore service
-CMD ["bash", "-c", "\
-    schematool -dbType postgres -initSchema && \
-    hive --service metastore"]
+# CMD ["bash", "-c", "\
+#   schematool -dbType postgres -initSchema && \
+#    hive --service metastore"]
+
+COPY start-metastore.sh /opt/hive/start-metastore.sh
+RUN chmod +x /opt/hive/start-metastore.sh
+
+CMD ["/opt/hive/start-metastore.sh"]
