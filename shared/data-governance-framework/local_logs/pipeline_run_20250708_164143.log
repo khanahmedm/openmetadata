@@ -1,0 +1,6 @@
+{"time": "2025-07-08 16:41:43,367", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "2161914337", "msg": "Notebook started"}
+{"time": "2025-07-08 16:41:43,387", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "ConfigLoader initialized for target table: genome"}
+{"time": "2025-07-08 16:41:43,388", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "Resolved config path: s3a://cdm-lake/config-json/genome.json"}
+{"time": "2025-07-08 16:41:43,389", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "Loading config from MinIO: bucket=cdm-lake, key=config-json/genome.json"}
+{"time": "2025-07-08 16:41:43,543", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "Config loaded successfully from MinIO"}
+{"time": "2025-07-08 16:41:43,544", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "ERROR", "module": "config_loader", "msg": "Missing required fields in config: ['great_expectations_validations']"}

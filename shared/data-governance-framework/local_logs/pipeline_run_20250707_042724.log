@@ -1,0 +1,34 @@
+{"time": "2025-07-07 04:27:24,507", "level": "INFO", "module": "698712234", "msg": "Notebook started"}
+{"time": "2025-07-07 04:27:24,519", "level": "INFO", "module": "config_loader", "msg": "ConfigLoader initialized for target table: genome"}
+{"time": "2025-07-07 04:27:24,519", "level": "INFO", "module": "config_loader", "msg": "Resolved config path: s3a://cdm-lake/config-json/genome.json"}
+{"time": "2025-07-07 04:27:24,520", "level": "INFO", "module": "config_loader", "msg": "Loading config from MinIO: bucket=cdm-lake, key=config-json/genome.json"}
+{"time": "2025-07-07 04:27:24,659", "level": "INFO", "module": "config_loader", "msg": "Config loaded successfully from MinIO"}
+{"time": "2025-07-07 04:27:24,660", "level": "INFO", "module": "config_loader", "msg": "All required fields are present in the config"}
+{"time": "2025-07-07 04:27:24,661", "level": "DEBUG", "module": "config_loader", "msg": "Target table: pangenome.genome"}
+{"time": "2025-07-07 04:27:28,866", "level": "INFO", "module": "698712234", "msg": "Notebook started"}
+{"time": "2025-07-07 04:27:28,867", "level": "INFO", "module": "config_loader", "msg": "ConfigLoader initialized for target table: genome"}
+{"time": "2025-07-07 04:27:28,867", "level": "INFO", "module": "config_loader", "msg": "Resolved config path: s3a://cdm-lake/config-json/genome.json"}
+{"time": "2025-07-07 04:27:28,868", "level": "INFO", "module": "config_loader", "msg": "Loading config from MinIO: bucket=cdm-lake, key=config-json/genome.json"}
+{"time": "2025-07-07 04:27:28,881", "level": "INFO", "module": "config_loader", "msg": "Config loaded successfully from MinIO"}
+{"time": "2025-07-07 04:27:28,882", "level": "INFO", "module": "config_loader", "msg": "All required fields are present in the config"}
+{"time": "2025-07-07 04:27:28,883", "level": "DEBUG", "module": "config_loader", "msg": "Target table: pangenome.genome"}
+{"time": "2025-07-07 04:27:30,411", "level": "INFO", "module": "spark_session", "msg": "Found 4 JARs in /home/jovyan/jars"}
+{"time": "2025-07-07 04:27:30,412", "level": "DEBUG", "module": "spark_session", "msg": "JARs: ['/home/jovyan/jars/aws-java-sdk-bundle-1.12.367.jar', '/home/jovyan/jars/delta-core_2.12-2.4.0.jar', '/home/jovyan/jars/delta-storage-2.4.0.jar', '/home/jovyan/jars/hadoop-aws-3.3.4.jar']"}
+{"time": "2025-07-07 04:27:30,412", "level": "INFO", "module": "spark_session", "msg": "Starting Spark session..."}
+{"time": "2025-07-07 04:27:34,703", "level": "INFO", "module": "spark_session", "msg": "Spark session started successfully"}
+{"time": "2025-07-07 04:27:37,458", "level": "DEBUG", "module": "config_loader", "msg": "Input files: [{'source': 'GTDB', 'file_path': 's3a://cdm-lake/bronze/gtdb/sp_clusters_r214.tsv', 'file_type': 'tsv', 'delimiter': '\t', 'ignore_first_line': 'no'}, {'source': 'NCBI', 'file_path': 's3a://cdm-lake/bronze/ncbi/assembly_summary_genbank.txt', 'file_type': 'tsv', 'delimiter': '\t', 'ignore_first_line': 'yes'}]"}
+{"time": "2025-07-07 04:27:37,459", "level": "INFO", "module": "input_file_validator", "msg": "Starting input file validation..."}
+{"time": "2025-07-07 04:27:37,464", "level": "INFO", "module": "input_file_validator", "msg": "Checking file: s3a://cdm-lake/bronze/gtdb/sp_clusters_r214.tsv"}
+{"time": "2025-07-07 04:27:37,471", "level": "INFO", "module": "input_file_validator", "msg": "File exists: s3://cdm-lake/bronze/gtdb/sp_clusters_r214.tsv"}
+{"time": "2025-07-07 04:27:37,584", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 1: Tab-delimited"}
+{"time": "2025-07-07 04:27:37,585", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 2: Tab-delimited"}
+{"time": "2025-07-07 04:27:37,586", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 3: Tab-delimited"}
+{"time": "2025-07-07 04:27:37,587", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 4: Tab-delimited"}
+{"time": "2025-07-07 04:27:37,587", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 5: Tab-delimited"}
+{"time": "2025-07-07 04:27:37,588", "level": "INFO", "module": "input_file_validator", "msg": "Checking file: s3a://cdm-lake/bronze/ncbi/assembly_summary_genbank.txt"}
+{"time": "2025-07-07 04:27:37,593", "level": "INFO", "module": "input_file_validator", "msg": "File exists: s3://cdm-lake/bronze/ncbi/assembly_summary_genbank.txt"}
+{"time": "2025-07-07 04:28:27,895", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 2: Tab-delimited"}
+{"time": "2025-07-07 04:28:27,989", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 3: Tab-delimited"}
+{"time": "2025-07-07 04:28:27,993", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 4: Tab-delimited"}
+{"time": "2025-07-07 04:28:27,995", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 5: Tab-delimited"}
+{"time": "2025-07-07 04:28:27,997", "level": "DEBUG", "module": "input_file_validator", "msg": "Line 6: Tab-delimited"}

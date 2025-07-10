@@ -1,0 +1,7 @@
+{"time": "2025-07-08 16:30:18,679", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "3196201400", "msg": "Notebook started"}
+{"time": "2025-07-08 16:30:18,691", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "ConfigLoader initialized for target table: genome"}
+{"time": "2025-07-08 16:30:18,692", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "Resolved config path: s3a://cdm-lake/config-json/genome.json"}
+{"time": "2025-07-08 16:30:18,693", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "Loading config from MinIO: bucket=cdm-lake, key=config-json/genome.json"}
+{"time": "2025-07-08 16:30:18,907", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "Config loaded successfully from MinIO"}
+{"time": "2025-07-08 16:30:18,908", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "INFO", "module": "config_loader", "msg": "All required fields are present in the config"}
+{"time": "2025-07-08 16:30:18,909", "pipeline": "pangenome", "schema": "pangenome", "table": "genome", "level": "DEBUG", "module": "config_loader", "msg": "Target table: pangenome.genome"}

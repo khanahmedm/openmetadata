@@ -1,0 +1,9 @@
+pyspark==3.4.1
+delta-spark==2.4.0
+boto3
+pyyaml
+great_expectations==0.18.13
+linkml-runtime
+linkml-validator
+streamlit 
+pandas

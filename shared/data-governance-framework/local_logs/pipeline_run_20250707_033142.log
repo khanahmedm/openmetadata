@@ -1,0 +1,7 @@
+{"time": "2025-07-07 03:31:42,814", "level": "INFO", "module": "779780011", "msg": "Notebook started"}
+{"time": "2025-07-07 03:31:42,835", "level": "INFO", "module": "config_loader", "msg": "ConfigLoader initialized for target table: genome"}
+{"time": "2025-07-07 03:31:42,835", "level": "INFO", "module": "config_loader", "msg": "Resolved config path: s3a://cdm-lake/config-json/genome.json"}
+{"time": "2025-07-07 03:31:42,836", "level": "INFO", "module": "config_loader", "msg": "Loading config from MinIO: bucket=cdm-lake, key=config-json/genome.json"}
+{"time": "2025-07-07 03:31:42,916", "level": "INFO", "module": "config_loader", "msg": "Config loaded successfully from MinIO"}
+{"time": "2025-07-07 03:31:42,918", "level": "INFO", "module": "config_loader", "msg": "All required fields are present in the config"}
+{"time": "2025-07-07 03:31:42,918", "level": "DEBUG", "module": "config_loader", "msg": "Target table: pangenome.genome"}
