@@ -21,6 +21,12 @@ def run_referential_integrity_checks(spark: SparkSession, config_loader, logger:
     ri_rules = loader.get_referential_integrity_rules()
     target_table = loader.get_target_table()
     target_table_short = target_table.split(".")[-1]
+
+    if not ri_rules:
+        logger.warning(f"No referential integrity rules defined for table: {target_table}")
+        print(f"\nℹ️ No referential integrity rules defined for table: {target_table}")
+        return False
+
     target_df = spark.table(target_table)
 
     logger.info(f"Starting referential integrity checks for table: {target_table}")

@@ -2,6 +2,7 @@ import boto3
 import yaml
 import logging
 from typing import Dict, Any
+import io
 
 
 def validate_schema_against_file(config_loader, logger: logging.Logger) -> Dict[str, Any]:
@@ -31,8 +32,15 @@ def validate_schema_against_file(config_loader, logger: logging.Logger) -> Dict[
 
     try:
         response = s3.get_object(Bucket=bucket, Key=key)
-        lines = response["Body"].read().decode("utf-8").split("\n")
-        header_line = lines[1] if ignore_first_line else lines[0]
+        #lines = response["Body"].read().decode("utf-8").split("\n")
+        #header_line = lines[1] if ignore_first_line else lines[0]
+
+        body_stream = io.TextIOWrapper(response["Body"], encoding="utf-8")
+        if ignore_first_line:
+            next(body_stream)  # Skip first line
+        header_line = next(body_stream).strip()
+        #header_columns = [col.strip() for col in header_line.split(delimiter)]
+
         header_columns = [col.strip() for col in header_line.strip().split(delimiter)]
 
         logger.info("Header columns successfully extracted from output file")

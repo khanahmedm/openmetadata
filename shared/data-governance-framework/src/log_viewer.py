@@ -33,18 +33,30 @@ selected_files = st.sidebar.multiselect("📂 Log Files", options=log_file_names
 # Filter S3 keys to only those selected
 filtered_keys = [key for key in log_objects if key.split("/")[-1] in selected_files]
 
-# Load and concatenate logs
+# Load and concatenate logs with line-by-line JSON parsing
 dfs = []
 for key in filtered_keys:
     log_obj = s3.get_object(Bucket=BUCKET, Key=key)
     content = log_obj['Body'].read().decode("utf-8")
-    try:
-        df = pd.read_json(io.StringIO(content), lines=True)
-        df['time'] = pd.to_datetime(df['time'], format="%Y-%m-%d %H:%M:%S,%f")
-        df["log_file"] = key.split("/")[-1]
+    
+    rows = []
+    for i, line in enumerate(content.splitlines(), 1):
+        try:
+            clean_line = line.encode('unicode_escape').decode('utf-8')
+            entry = json.loads(clean_line)
+            entry['log_file'] = key.split("/")[-1]
+            rows.append(entry)
+        except json.JSONDecodeError as e:
+            st.warning(f"⚠️ Skipped line {i} in {key}: {e}")
+
+    if rows:
+        df = pd.DataFrame(rows)
+        try:
+            df['time'] = pd.to_datetime(df['time'], format="%Y-%m-%d %H:%M:%S,%f")
+        except Exception:
+            df['time'] = pd.to_datetime(df['time'], errors="coerce")
         dfs.append(df)
-    except Exception as e:
-        st.warning(f"⚠️ Skipped {key} due to error: {e}")
+
 
 
 # Combine all logs

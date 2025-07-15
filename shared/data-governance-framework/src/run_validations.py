@@ -44,16 +44,22 @@ def run_validations_from_config(config_loader, logger: logging.Logger) -> Dict[s
 
     # Read file from S3
     response = s3.get_object(Bucket=bucket, Key=key)
-    content = response["Body"].read().decode("utf-8")
+    #content = response["Body"].read().decode("utf-8")
 
     # Parse with CSV reader
-    reader = csv.reader(io.StringIO(content), delimiter=delimiter)
-    rows = list(reader)
+    #reader = csv.reader(io.StringIO(content), delimiter=delimiter)
+    #rows = list(reader)
+
+    stream = io.TextIOWrapper(response["Body"], encoding="utf-8")
+    reader = csv.reader(stream, delimiter=delimiter)
+    header = next(reader)
+    col_index = {name: idx for idx, name in enumerate(header)}
+
 
     # Extract header and data
-    header = rows[0]
-    data_rows = rows[1:] if ignore_first_line else rows[1:]
-    col_index = {name: idx for idx, name in enumerate(header)}
+    #header = rows[0]
+    #data_rows = rows[1:] if ignore_first_line else rows[1:]
+    #col_index = {name: idx for idx, name in enumerate(header)}
     validation_errors = []
 
     passed_validations = []
@@ -62,7 +68,16 @@ def run_validations_from_config(config_loader, logger: logging.Logger) -> Dict[s
     logger.info("Running validations...")
     logger.debug(f"Header columns: {header}")
 
-    for row_num, row in enumerate(data_rows, start=2 if ignore_first_line else 2):
+    #for row_num, row in enumerate(data_rows, start=2 if ignore_first_line else 2):
+
+    row_num = 1
+    for row in reader:
+        row_num += 1
+
+        # Skip line if ignore_first_line is true and we're still on the first data row
+        if ignore_first_line and row_num == 2:
+            continue
+
         for rule in validations:
             col = rule["column"]
             if col not in col_index:
@@ -114,6 +129,9 @@ def run_validations_from_config(config_loader, logger: logging.Logger) -> Dict[s
                     print(msg)
                     logger.error(msg)
                     validation_errors.append(msg)
+
+        # (rest of the validation code)
+        # row_num += 1
 
     # Prepare unique passed validations
     passed_rules_summary = sorted(set(passed_validations))
