@@ -1,3 +1,14 @@
+"""
+Run Great Expectations validations dynamically using Spark DataFrames.
+
+This module supports:
+- Loading a Delta table into a DataFrame
+- Registering a Spark runtime data source with GE
+- Dynamically applying expectations from a config
+- Saving the expectation suite
+- Running a checkpoint and generating Data Docs
+"""
+
 import json
 import logging
 from great_expectations.data_context import get_context
@@ -7,13 +18,20 @@ from great_expectations.checkpoint import SimpleCheckpoint
 
 def run_great_expectations_validation(spark, loader, logger: logging.Logger, suite_name: str = "default_suite") -> None:
     """
-    Run Great Expectations validations on a Spark Delta table.
+    Run Great Expectations validations on a Spark Delta table using rules from config.
 
-    Parameters:
-        spark (SparkSession): Spark session.
-        loader: ConfigLoader instance.
-        logger (Logger): Logger instance.
-        suite_name (str): Name of the expectation suite (default is 'default_suite').
+    Args:
+        spark (SparkSession): Active Spark session to read Delta tables.
+        loader: An instance of ConfigLoader with loaded config.
+        logger (logging.Logger): Logger instance for structured logging.
+        suite_name (str): Name of the expectation suite (default = 'default_suite').
+
+    Behavior:
+        - Loads the Spark table defined in the config.
+        - Initializes GE context and registers Spark runtime datasource.
+        - Loads dynamic expectations from config and applies them to the data.
+        - Saves the expectation suite and validates data.
+        - Builds Data Docs and executes a checkpoint.
     """
     target_table = loader.get_target_table()
     table_name = target_table
@@ -28,6 +46,7 @@ def run_great_expectations_validation(spark, loader, logger: logging.Logger, sui
         logger.error(f"Failed to load table {target_table}: {e}", exc_info=True)
         return
 
+    # Initialize GE context and register Spark datasource
     try:
         context = get_context()
         logger.info("Great Expectations context initialized.")
@@ -51,6 +70,7 @@ def run_great_expectations_validation(spark, loader, logger: logging.Logger, sui
         logger.error("Failed during GE context or datasource setup.", exc_info=True)
         return
 
+    # Define a runtime batch request to link DataFrame with GE
     try:
         batch_request = RuntimeBatchRequest(
             datasource_name="my_spark_datasource",
@@ -64,6 +84,7 @@ def run_great_expectations_validation(spark, loader, logger: logging.Logger, sui
         logger.error("Failed to create RuntimeBatchRequest.", exc_info=True)
         return
 
+    # Apply expectations from config
     try:
         validator = context.get_validator(
             batch_request=batch_request,
@@ -108,6 +129,7 @@ def run_great_expectations_validation(spark, loader, logger: logging.Logger, sui
         logger.error("Error defining expectations or saving suite.", exc_info=True)
         return
 
+    # Validate the batch and log results
     try:
         result = validator.validate()
         logger.info("Validation run completed.")
@@ -125,6 +147,7 @@ def run_great_expectations_validation(spark, loader, logger: logging.Logger, sui
         logger.error("Validation failed.", exc_info=True)
         return
 
+    # Build Data Docs and execute checkpoint
     try:
         context.build_data_docs()
         logger.info("Data Docs built after validation.")

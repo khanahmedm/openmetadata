@@ -12,11 +12,11 @@ from botocore.exceptions import BotoCoreError, ClientError
 st.set_page_config(page_title="Pipeline Log Viewer", layout="wide")
 
 # ---- MinIO config ----
-S3_ENDPOINT = "http://minio:9000"  # or localhost:9000 if running outside Docker
-AWS_ACCESS_KEY_ID = "minioadmin"
-AWS_SECRET_ACCESS_KEY = "minioadmin"
-BUCKET = "cdm-lake"
-PREFIX = "logs/pangenome/"  # S3 key prefix where logs are stored
+S3_ENDPOINT = "http://localhost:9002"  # or localhost:9000 if running outside Docker
+AWS_ACCESS_KEY_ID = "minio-readwrite"
+AWS_SECRET_ACCESS_KEY = "iUtdgbA5"
+BUCKET = "test-bucket"
+PREFIX = "data_validations/logs/pangenome/"  # S3 key prefix where logs are stored
 
 # ---- Connect to MinIO ----
 try:
